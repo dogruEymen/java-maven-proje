@@ -5,3 +5,5 @@ projects:
     codeRepo:
       url: "https://github.com/dogruEymen/java-maven-proje.git"
       credentialsId: ""
+    builder_name: "maven:3.9.6-eclipse-temurin-21"
+    runner_name: "eclipse-temurin:21-jre-alpine"

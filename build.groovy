@@ -18,12 +18,16 @@ node {
 
     String javaCodePath = './maven-project'
     String projectsFilePath = './projects.yml'
+    String versionFilePath = './maven-project/version.yml'
 
     def projects = readYaml(file: projectsFilePath)['projects']
     def project = projects['MAVEN']
     String projectName = project['name']
     String projectRepoUrl = project['codeRepo']['url']
     String projectRepoCredentialsId = project['codeRepo']['credentialsId']
+    String builderImage = project['builder_name']
+    String runnerImage = project['runner_name']
+    String version = readYaml(file: versionFilePath)['current_version']
 
 
     try {
@@ -75,8 +79,11 @@ node {
 
             dir (javaCodePath) {
             
-                sh 'docker build -t java21-app .'
-                sh 'docker run -p 4040:4040 java21-app' 
+                sh "docker build --build-arg BUILDER_NAME=${builderImage} \
+                --build-arg RUNNER_NAME=${runnerImage} --build-arg VERSION=${version} \
+                -t maven-${version} ."
+                echo 'Container başlatılıyor...'
+                sh "docker run -d -p 4040:4040 maven-${version}"
             }  
         }
     }
