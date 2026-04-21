@@ -40,7 +40,7 @@ node {
 
     catch (Exception e) {
     
-        echo 'Build failed. Error: ${e.message}'
+        echo "Build failed. Error: ${e.message}"
     
     }
 
