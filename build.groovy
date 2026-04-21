@@ -29,7 +29,7 @@ node {
 
                 dir(PROJECT_PATH) {
                     
-                    withEnv("PATH+MAVEN=${MAVEN_PATH}/bin/"){
+                    withEnv("PATH+MAVEN=${MAVEN_PATH}/bin"){
                         sh 'mvn clean install'
                     }
     
