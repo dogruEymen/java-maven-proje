@@ -55,17 +55,26 @@ node {
             
         }
 
+        String registry = "ghrc.io"
+        String repository = "dogrueymen/java-maven-project"
+        String fullImageName = "${registry}/${repository}:${version}"
+
         stage (DOCKER_BUILD_STAGE) {
 
             dir (javaCodePath) {
             
-                sh "docker build --build-arg BUILDER_NAME=${builderImage} \
+                sh """docker build --build-arg BUILDER_NAME=${builderImage} \
                 --build-arg RUNNER_NAME=${runnerImage} --build-arg VERSION=${version} \
-                -t maven-${version} ."
+                -t ${fullImageName} ."""
+
+                echo 'Image GHRCye gönderiliyor...'
+                sh 'docker push ${fullImageName}'
+
+
                 echo 'Container başlatılıyor...'
-                sh "docker run --name maven-${version} -d -p 4040:4040 "
-            }  
-        }
+                sh "docker run -d -p 4040:4040 --name test-app-${version} ${fullImageName}"
+            } 
+        } 
     }
 
     catch (Exception e) {
