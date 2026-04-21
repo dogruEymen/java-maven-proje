@@ -1,6 +1,7 @@
 node {
 
     String BUILD_STAGE = "Build"
+    String MAVEN_PATH = tool 'maven_3.9'
 
     try {
 
@@ -28,8 +29,10 @@ node {
 
                 dir(PROJECT_PATH) {
                     
-                    sh 'mvn clean install'
-
+                    withEnv("PATH+MAVEN=${MAVEN_PATH}/bin/"){
+                        sh 'mvn clean install'
+                    }
+    
                 }
 
             }
