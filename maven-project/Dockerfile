@@ -23,7 +23,7 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # Uygulamanın çalışacağı portu belirtiyoruz.
-EXPOSE 8080
+EXPOSE 4040
 
 # Uygulamayı başlatan komut.
 ENTRYPOINT ["java", "-jar", "app.jar"]
