@@ -67,12 +67,17 @@ node {
                 --build-arg RUNNER_NAME=${runnerImage} --build-arg VERSION=${version} \
                 -t ${fullImageName} ."""
 
-                echo 'Image GHCRye gönderiliyor...'
-                sh "docker push ${fullImageName}"
-
-
                 echo 'Container başlatılıyor...'
                 sh "docker run -d -p 4040:4040 --name test-app-${version} ${fullImageName}"
+
+                withCredentials([usernamePassword(credentialsId: 'github-ghcr-token',
+                                passwordVariable: 'GHCR_PASSWORD',
+                                usernameVariable: 'GHCR_USER')])
+                echo 'GHCR Giriş Yapılıyor...'
+                sh "echo ${GHCR_PASSWORD} | docker login ${registry} -u ${GHCR_USER} --password-stdin"
+
+                echo "imaj gönderiliyor..."
+                sh "docker push ${fullImageName}"
             } 
         } 
     }

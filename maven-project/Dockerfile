@@ -14,7 +14,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # --- AŞAMA 2: Run (Çalıştırma) ---
-FROM ${RUNNER_NAME} as runner
+FROM ${RUNNER_NAME} AS runner
 
 LABEL org.opencontainers.image.source=https://github.com/dogruEymen/java-maven-project
 LABEL org.opencontainers.image.description="Java Maven Projesi"
