@@ -57,7 +57,7 @@ node {
 
         String registry = "ghcr.io"
         String repository = "dogrueymen/java-maven-project"
-        String fullImageName = "${registry}/${repository}:${version}"
+        String fullImageName = "${registry}/${repository}:${version}".toLowerCase()
 
         stage (DOCKER_BUILD_STAGE) {
 
@@ -72,12 +72,15 @@ node {
 
                 withCredentials([usernamePassword(credentialsId: 'github-ghcr-token',
                                 passwordVariable: 'GHCR_PASSWORD',
-                                usernameVariable: 'GHCR_USER')])
+                                usernameVariable: 'GHCR_USER')]) {
+
+                
                 echo 'GHCR Giriş Yapılıyor...'
                 sh "echo ${GHCR_PASSWORD} | docker login ${registry} -u ${GHCR_USER} --password-stdin"
 
                 echo "imaj gönderiliyor..."
                 sh "docker push ${fullImageName}"
+                }
             } 
         } 
     }
