@@ -68,7 +68,7 @@ node {
                 -t ${fullImageName} ."""
 
                 echo 'Container başlatılıyor...'
-                sh 'docker rm -f test-app-${version} || true'
+                sh "docker rm -f test-app-${version} || true"
                 sh "docker run -d -p 4040:4040 --name test-app-${version} ${fullImageName}"
 
                 withCredentials([usernamePassword(credentialsId: 'github-ghcr-token',
