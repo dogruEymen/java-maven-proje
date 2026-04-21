@@ -2,7 +2,6 @@ node {
 
     String BUILD_STAGE = "Build"
 
-
     try {
 
         deleteDir()
@@ -14,7 +13,7 @@ node {
         }
         echo 'Code is successfully obtained.'
 
-        def projects = readYaml(file: projects.yml)['projects']
+        def projects = readYaml(file: "projects.yml")['projects']
 
         echo 'Build Stage is starting...'
 
