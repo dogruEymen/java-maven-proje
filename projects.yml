@@ -1,3 +1,7 @@
 projects:
-  - name: "maven-project"
+  MAVEN: # Burası PROJECT_ID'ye karşılık gelen yer
+    name: "maven-project"
     path: "./maven-project"
+    codeRepo:
+      url: "https://github.com/dogruEymen/java-maven-proje.git"
+      credentialsId: ""
