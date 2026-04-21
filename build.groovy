@@ -1,6 +1,6 @@
 node {
 
-    String PROJECT_ID = params.PROJECT_ID
+    //String PROJECT_ID = params.PROJECT_ID
     println("PROJECT_ID: $PROJECT_ID")
 
 
@@ -13,7 +13,7 @@ node {
     String projectsFilePath = './projects.yml'
 
     def projects = readYaml(file: projectsFilePath)['projects']
-    def project = projects[PROJECT_ID]
+    def project = projects['MAVEN']
     String projectName = project['name']
     String projectRepoUrl = project['codeRepo']{'url'}
     String projectRepoCredentialsId = project['codeRepo']['credentialsId']
