@@ -17,7 +17,7 @@ node {
 
         stage (BUILD_STAGE) {
             
-            projects.each { project - >
+            projects.each { project ->
                 
                 String PROJECT_NAME = project.['name']
                 String PROJECT_PATH = project.['path']
