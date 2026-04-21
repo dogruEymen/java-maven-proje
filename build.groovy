@@ -3,7 +3,14 @@ node {
     //String PROJECT_ID = params.PROJECT_ID
     //println("PROJECT_ID: $PROJECT_ID")
 
+        deleteDir()
 
+    stage ('Get Code') {
+
+        checkout scm
+    
+    }
+    
     String BUILD_STAGE = "Build"
     String VERSION_STAGE = "Version"
     String mavenPath = tool 'maven_3.9'
@@ -21,15 +28,7 @@ node {
 
     try {
 
-        deleteDir()
-
-        stage ('Get Code') {
-
-            checkout scm
-
-        }
-
-        // echo 'Code is successfully obtained.'
+        echo 'Code is successfully obtained.'
 
         
 
