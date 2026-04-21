@@ -77,7 +77,7 @@ node {
 
                 
                 echo 'GHCR Giriş Yapılıyor...'
-                sh "echo ${GHCR_PASSWORD} | docker login ${registry} -u ${GHCR_USER} --password-stdin"
+                sh "docker login ${registry} -u ${GHCR_USER} --password-stdin"
 
                 echo "imaj gönderiliyor..."
                 sh "docker push ${fullImageName}"
