@@ -1,33 +1,38 @@
 node {
 
-    String SUCCESS = "SUCCESS"
-    String FAILURE = "FAILURE"
+    String BUILD_STAGE = "Build"
 
 
-    def mvnHome = tool 'maven_3.9'
+    try {
 
-    stage('Checkout') {
-        checkout scm
-    }
+        deleteDir()
 
-    stage('BUILD STAGE') {
-        try {
-            echo 'Build işlemi başlatılıyor'
-            sh 'mvn clean install'
+        stage ('Get Code') {
+
+            checkout scm
+
         }
-        catch (Exception e) {
 
-            currentBuild.result = FAILURE
-            echo 'Build başarısız, hata: ${e.message}'
+        def projects = readYaml(file: projects.yml)
+
+        stage (BUILD_STAGE) {
+            
+            projects.each { project - >
+                
+                String PROJECT_NAME = project.['name']
+                String PROJECT_PATH = project.['path']
+                
+                echo "${PROJECT_NAME} project is building..."
+
+                dir(PROJECT_PATH) {
+                    
+                    sh 'mvn clean install'
+
+                }
+
+            }
+            
         }
-        finally {
-
-            echo 'Build aşaması bitti'
-        }
-    }
-
-    stage('CREATE IMAGE') {
-        
     }
 
 }
