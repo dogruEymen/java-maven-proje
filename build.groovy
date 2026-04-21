@@ -55,7 +55,7 @@ node {
             
         }
 
-        String registry = "ghrc.io"
+        String registry = "ghcr.io"
         String repository = "dogrueymen/java-maven-project"
         String fullImageName = "${registry}/${repository}:${version}"
 
@@ -67,7 +67,7 @@ node {
                 --build-arg RUNNER_NAME=${runnerImage} --build-arg VERSION=${version} \
                 -t ${fullImageName} ."""
 
-                echo 'Image GHRCye gönderiliyor...'
+                echo 'Image GHCRye gönderiliyor...'
                 sh "docker push ${fullImageName}"
 
 
