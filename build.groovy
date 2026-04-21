@@ -63,7 +63,7 @@ node {
                 --build-arg RUNNER_NAME=${runnerImage} --build-arg VERSION=${version} \
                 -t maven-${version} ."
                 echo 'Container başlatılıyor...'
-                sh "docker run -d --name maven-${version} -p 4040:4040 "
+                sh "docker run --name maven-${version} -d -p 4040:4040 "
             }  
         }
     }
