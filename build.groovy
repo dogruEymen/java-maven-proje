@@ -73,7 +73,8 @@ node {
         }
 
         stage (VERSION_STAGE) {
-
+            sh 'docker build -t java21-app .'
+            sh 'docker run -p 8080:8080 java21-app'   
         }
     }
 
