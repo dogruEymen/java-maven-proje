@@ -68,7 +68,7 @@ node {
                 -t ${fullImageName} ."""
 
                 echo 'Image GHRCye gönderiliyor...'
-                sh 'docker push ${fullImageName}'
+                sh "docker push ${fullImageName}"
 
 
                 echo 'Container başlatılıyor...'
