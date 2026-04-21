@@ -15,7 +15,7 @@ node {
     def projects = readYaml(file: projectsFilePath)['projects']
     def project = projects['MAVEN']
     String projectName = project['name']
-    String projectRepoUrl = project['codeRepo']{'url'}
+    String projectRepoUrl = project['codeRepo']['url']
     String projectRepoCredentialsId = project['codeRepo']['credentialsId']
 
 
