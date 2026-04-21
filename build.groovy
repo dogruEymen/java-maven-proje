@@ -19,8 +19,8 @@ node {
             
             projects.each { project ->
                 
-                String PROJECT_NAME = project.['name']
-                String PROJECT_PATH = project.['path']
+                String PROJECT_NAME = project['name']
+                String PROJECT_PATH = project['path']
                 
                 echo "${PROJECT_NAME} project is building..."
 
