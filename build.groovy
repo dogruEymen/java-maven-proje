@@ -12,8 +12,11 @@ node {
             checkout scm
 
         }
+        echo 'Code is successfully obtained.'
 
-        def projects = readYaml(file: projects.yml)
+        def projects = readYaml(file: projects.yml)['projects']
+
+        echo 'Build Stage is starting...'
 
         stage (BUILD_STAGE) {
             
