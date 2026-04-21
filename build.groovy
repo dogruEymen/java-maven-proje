@@ -1,7 +1,7 @@
 node {
 
     //String PROJECT_ID = params.PROJECT_ID
-    println("PROJECT_ID: $PROJECT_ID")
+    //println("PROJECT_ID: $PROJECT_ID")
 
 
     String BUILD_STAGE = "Build"
