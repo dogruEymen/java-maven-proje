@@ -34,8 +34,8 @@ node {
             
         }
     }
-    
-    catch (exception e) {
+
+    catch (Exception e) {
     
         echo 'Build failed. Error: ${e.message}'
     
