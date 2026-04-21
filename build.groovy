@@ -12,7 +12,7 @@ node {
     }
     
     String BUILD_STAGE = "Build"
-    String VERSION_STAGE = "Version"
+    String DOCKER_BUILD_STAGE = "Version"
     String mavenPath = tool 'maven_3.9'
 
 
@@ -37,6 +37,46 @@ node {
         
 
         echo 'Build Stage is starting...'
+
+
+        stage (BUILD_STAGE) {
+
+            echo "$projectName is building..."
+            
+            dir (javaCodePath) {
+
+                withEnv(["PATH+MAVEN=$mavenPath/bin"]) {
+                    
+                    sh 'mvn clean install'
+
+                }
+
+            }
+            
+        }
+
+        stage (DOCKER_BUILD_STAGE) {
+
+            dir (javaCodePath) {
+            
+                sh "docker build --build-arg BUILDER_NAME=${builderImage} \
+                --build-arg RUNNER_NAME=${runnerImage} --build-arg VERSION=${version} \
+                -t maven-${version} ."
+                echo 'Container başlatılıyor...'
+                sh "docker run -d -p 4040:4040 maven-${version}"
+            }  
+        }
+    }
+
+    catch (Exception e) {
+    
+        echo "Build failed. Error: ${e.message}"
+    
+    }
+
+}
+
+
         /*
         stage (BUILD_STAGE) {
             
@@ -58,40 +98,3 @@ node {
             }
             
         }*/
-
-        stage (BUILD_STAGE) {
-
-            echo "$projectName is building..."
-            
-            dir (javaCodePath) {
-
-                withEnv(["PATH+MAVEN=$mavenPath/bin"]) {
-                    
-                    sh 'mvn clean install'
-
-                }
-
-            }
-            
-        }
-
-        stage (VERSION_STAGE) {
-
-            dir (javaCodePath) {
-            
-                sh "docker build --build-arg BUILDER_NAME=${builderImage} \
-                --build-arg RUNNER_NAME=${runnerImage} --build-arg VERSION=${version} \
-                -t maven-${version} ."
-                echo 'Container başlatılıyor...'
-                sh "docker run -d -p 4040:4040 maven-${version}"
-            }  
-        }
-    }
-
-    catch (Exception e) {
-    
-        echo "Build failed. Error: ${e.message}"
-    
-    }
-
-}
