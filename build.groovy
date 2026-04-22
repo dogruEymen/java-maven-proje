@@ -3,7 +3,7 @@ node {
     //String PROJECT_ID = params.PROJECT_ID
     //println("PROJECT_ID: $PROJECT_ID")
 
-        deleteDir()
+    deleteDir()
 
     stage ('Get Code') {
 
@@ -12,7 +12,7 @@ node {
     }
     
     String BUILD_STAGE = "Build"
-    String DOCKER_BUILD_STAGE = "Version"
+    String DOCKER_BUILD_STAGE = "Docker Build"
     String mavenPath = tool 'maven_3.9'
 
 
@@ -31,10 +31,6 @@ node {
 
 
     try {
-
-        echo 'Code is successfully obtained.'
-
-        
 
         echo 'Build Stage is starting...'
 
