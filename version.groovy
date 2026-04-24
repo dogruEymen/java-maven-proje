@@ -29,7 +29,7 @@ node {
             git config --global user.email "muh.eymendogru@gmail.com"
             git config --global user.name "Jenkins CI"
             git add .
-            git commit -m "version.yml updated to new app version"
+            git commit -m "version.yml updated to new app version [ci skip]"
             git push https://${GHCR_USERNAME}:${GHCR_PASSWORD}@github.com/dogruEymen/java-maven-proje.git HEAD:main
             """
         }
