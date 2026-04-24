@@ -4,10 +4,10 @@ node {
     try {
 
         checkout scm
-        
+
         stage ('BUILD') {
 
-            def buildResult = build job: 'java-maven', wait: true, propagation: false
+            def buildResult = build job: 'java-maven', wait: true, propagate: false
             
             if (buildResult.result == 'SUCCESS') {
                 // If build success then start versioning 
@@ -17,7 +17,7 @@ node {
 
                         echo 'Build success, versioning stage is starting...'
 
-                        def versionResult = build job: 'version-job', wait: true, propagation: false
+                        def versionResult = build job: 'version-job', wait: true, propagate: false
                     
                         if (versionResult.result == 'SUCCESS') {
 

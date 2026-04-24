@@ -22,7 +22,7 @@ node {
             git config --global user.name "Jenkins CI"
             git add .
             git commit -m "version update"
-            git push origin main
+            git push origin HEAD:main
         """
     }
     
