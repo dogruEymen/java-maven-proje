@@ -23,7 +23,7 @@ node {
 
                         } else {
 
-                            echo 'Something went wrong in VERSION STAGE'
+                            echo 'Something went wrong in VERSION STAGE !'
 
                         }
 
