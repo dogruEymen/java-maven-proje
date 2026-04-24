@@ -17,13 +17,22 @@ node {
         
         println "${currentVersion} updated to ${updatedVersion}"
 
-        sh """
+    }
+
+    stage ('Push Changes') {
+        
+        withCredentials([usernamePassword(credentialsId: 'github-ghcr-token',
+                        passwordVariable: 'GHCR_PASSWORD',
+                        usernameVariable: 'GHCR_USERNAME')]) {
+
+            sh """
             git config --global user.email "muh.eymendogru@gmail.com"
             git config --global user.name "Jenkins CI"
             git add .
-            git commit -m "version update"
-            git push origin HEAD:main
-        """
+            git commit -m "version.yml updated to new app version"
+            git push https://${GHCR_USERNAME}:${GHCR_PASSWORD}@github.com/dogruEymen/java-maven-proje.git HEAD:main
+            """
+        }
     }
     
 }
