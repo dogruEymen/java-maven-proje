@@ -12,7 +12,7 @@ node {
         versionFile['current_version'] = updatedVersion
 
         writeYaml(file: versionFilePath, data: versionFile, overwrite: true)
-
+        
     }
     
 }

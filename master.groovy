@@ -19,7 +19,7 @@ node {
                     
                         if (versionResult.result == 'SUCCESS') {
 
-                            echo 'Versioning completed...'
+                            echo 'Versioning completed successfully...'
 
                         } else {
 
