@@ -18,6 +18,8 @@ node {
         println "${currentVersion} updated to ${updatedVersion}"
 
         sh """
+            git config --global user.email "muh.eymendogru@gmail.com"
+            git config --global user.name "Jenkins CI"
             git add .
             git commit -m "version update"
             git push origin main
