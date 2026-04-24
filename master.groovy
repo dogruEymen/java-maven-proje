@@ -3,6 +3,8 @@ node {
         // Trigger BUILD JOB
     try {
 
+        checkout scm
+        
         stage ('BUILD') {
 
             def buildResult = build job: 'java-maven', wait: true, propagation: false
