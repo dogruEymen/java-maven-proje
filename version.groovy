@@ -3,7 +3,7 @@ node {
     stage ('Versioning Stage') {
 
         checkout scm
-        
+
         String versionFilePath = './maven-project/version.yml'
         def versionFile = readYaml(file: versionFilePath)
         String currentVersion = versionFile['current_version']
@@ -15,6 +15,13 @@ node {
 
         writeYaml(file: versionFilePath, data: versionFile, overwrite: true)
         
+        println "${currentVersion} updated to ${updatedVersion}"
+
+        sh """
+            git add .
+            git commit -m "version update"
+            git push origin main
+        """
     }
     
 }
