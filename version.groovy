@@ -1,6 +1,8 @@
 node {
 
     stage ('Versioning Stage') {
+
+        checkout scm
         
         String versionFilePath = './maven-project/version.yml'
         def versionFile = readYaml(file: versionFilePath)
