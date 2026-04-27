@@ -5,7 +5,7 @@ public class HelloMaven {
 
         // Basit bir matematiksel işlem ile test edelim
         int sayi1 = 2222;
-        int sayi2 = 5220;
+        int sayi2 = 52200;
         int toplam = sayi1 + sayi2;
 
         System.out.println("Toplam sonucu: " + toplam);
