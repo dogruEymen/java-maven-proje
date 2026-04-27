@@ -13,9 +13,9 @@ node {
     
     String BUILD_STAGE = "Build"
     String DOCKER_BUILD_STAGE = "Docker Build"
+    String SONAR_STAGE = 'Code Quality Check with SonarQube'
+
     String mavenPath = tool 'maven_3.9'
-
-
     String javaCodePath = './maven-project'
     String projectsFilePath = './projects.yml'
     String versionFilePath = './maven-project/version.yml'
@@ -49,6 +49,15 @@ node {
 
             }
             
+        }
+
+        stage (SONAR_STAGE) {
+
+            withSonarQubeEnv('sonar-server') {
+                
+                sh 'mvn sonar:sonar'
+                
+            }
         }
 
         String registry = "ghcr.io"
