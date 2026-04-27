@@ -5,42 +5,49 @@ node {
 
         checkout scm
 
-        stage ('BUILD') {
-
-            def buildResult = build job: 'java-maven', wait: true, propagate: false
+        def changedFiles = sh(script: 'git diff --name-only HEAD~1', returnStdout: true).trim()
+        def shouldRun = changedFiles.contains('/src') || changedFiles.contains('pom.xml')
+        
+        if (shouldRun) {
             
-            if (buildResult.result == 'SUCCESS') {
-                // If build success then start versioning 
-                try {
+            stage ('BUILD') {
 
-                    stage ('VERSION') {
+                def buildResult = build job: 'java-maven', wait: true, propagate: false
+                
+                if (buildResult.result == 'SUCCESS') {
+                    // If build success then start versioning 
+                    try {
 
-                        echo 'Build success, versioning stage is starting...'
+                        stage ('VERSION') {
 
-                        def versionResult = build job: 'version-job', wait: true, propagate: false
-                    
-                        if (versionResult.result == 'SUCCESS') {
+                            echo 'Build success, versioning stage is starting...'
 
-                            echo 'Versioning completed successfully...'
+                            def versionResult = build job: 'version-job', wait: true, propagate: false
+                        
+                            if (versionResult.result == 'SUCCESS') {
 
-                        } else {
+                                echo 'Versioning completed successfully...'
 
-                            echo 'Something went wrong in VERSION STAGE !'
+                            } else {
 
-                        }
+                                echo 'Something went wrong in VERSION STAGE !'
 
-                    }    
+                            }
+
+                        }    
+
+                    }
+                    catch (Exception e) {
+
+                        echo "Error: ${e.message}"
+
+                    }
+
+                } else if (buildResult.result == 'FAILURE') {
+
+                    echo 'BUILD FAILED, VERSIONING STAGE IS SKIPPING'
 
                 }
-                catch (Exception e) {
-
-                    echo "Error: ${e.message}"
-
-                }
-
-            } else if (buildResult.result == 'FAILURE') {
-
-                echo 'BUILD FAILED, VERSIONING STAGE IS SKIPPING'
 
             }
 
