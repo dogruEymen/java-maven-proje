@@ -21,7 +21,7 @@ node {
 
     stage ('Push Changes') {
         
-        withCredentials([usernamePassword(credentialsId: 'git-webhook',
+        withCredentials([usernamePassword(credentialsId: 'github-webhook',
                         passwordVariable: 'GHCR_PASSWORD',
                         usernameVariable: 'GHCR_USERNAME')]) {
 

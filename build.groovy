@@ -67,7 +67,7 @@ node {
                 sh "docker rm -f test-app-${version} || true"
                 sh "docker run -d -p 4040:4040 --name test-app-${version} ${fullImageName}"
 
-                withCredentials([usernamePassword(credentialsId: 'git-webhook',
+                withCredentials([usernamePassword(credentialsId: 'github-webhook',
                                 passwordVariable: 'GHCR_PASSWORD',
                                 usernameVariable: 'GHCR_USER')]) {
 
