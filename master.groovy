@@ -51,6 +51,8 @@ node {
 
             }
 
+        } else {
+            echo 'Changes is not in /src or pom.xlm, no need to build.'
         }
 
     }
