@@ -4,7 +4,7 @@ public class HelloMaven {
         System.out.println("Hello! Maven projen başarıyla oluşturuldu.");
 
         // Basit bir matematiksel işlem ile test edelim
-        int sayi1 = 22;
+        int sayi1 = 222;
         int sayi2 = 50;
         int toplam = sayi1 + sayi2;
 
