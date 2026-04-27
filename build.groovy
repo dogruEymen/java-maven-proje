@@ -58,11 +58,13 @@ node {
                 withEnv(["PATH+MAVEN=$mavenPath/bin"]){
 
                     withSonarQubeEnv('sonar-server') {
-                
+                        
+                        sh 'rm -rf /root/.sonar/cache'
+                        
                         sh 'mvn sonar:sonar'
                 
                     }       
-                                 
+
                 }
 
             }
