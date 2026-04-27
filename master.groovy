@@ -61,7 +61,7 @@ node {
     }
     finally {
 
-        echo 'Merge result is sending via email etc.'
+        echo 'Merge result is sending via email etc..'
     }
 
 }
