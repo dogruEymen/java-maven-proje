@@ -7,4 +7,3 @@ projects:
       credentialsId: ""
     builder_name: "maven:3.9.6-eclipse-temurin-21"
     runner_name: "eclipse-temurin:21-jre-alpine"
-    ghcr_token: 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
