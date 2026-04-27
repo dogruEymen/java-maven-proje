@@ -6,7 +6,7 @@ node {
         checkout scm
 
         def changedFiles = sh(script: 'git diff --name-only HEAD~1', returnStdout: true).trim()
-        def shouldRun = changedFiles.contains('/src') || changedFiles.contains('pom.xml')
+        def shouldRun = (changedFiles.contains('/src') || changedFiles.contains('pom.xml'))
         
         if (shouldRun) {
             
