@@ -53,11 +53,20 @@ node {
 
         stage (SONAR_STAGE) {
 
-            withSonarQubeEnv('sonar-server') {
+            dir (javaCodePath) {
+
+                withEnv(["PATH+MAVEN=$mavenPath/bin"]){
+
+                    withSonarQubeEnv('sonar-server') {
                 
-                sh 'mvn sonar:sonar'
+                        sh 'mvn sonar:sonar'
                 
+                    }       
+                                 
+                }
+
             }
+            
         }
 
         String registry = "ghcr.io"
